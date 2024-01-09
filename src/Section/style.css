@@ -1,0 +1,22 @@
+.section {
+    background-color: #ffffff;
+    border-bottom: 2px solid #eee;
+}
+
+.section__header {
+    border-bottom: 2px solid #eee;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    justify-content: space-between;
+    align-items: center;
+}
+@media(max-width:767px){
+    .section__header{
+        grid-template-columns: 1fr;
+    }
+}
+
+.section__body {
+    padding: 0px 20px 20px;
+}

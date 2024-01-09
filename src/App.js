@@ -1,24 +1,48 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Buttons from './Buttons';
+import Form from './Form';
+import Tasks from './Tasks';
+import Section from './Section';
+import Container from './Container';
+
 
 function App() {
+
+  const tasks = [
+    {
+      content: "Zrobić podstawową todo liste w JS", done: true,
+    },
+    {
+      content: "Przenieść podstawową todo liste do React-a", done: false,
+    },
+  ];
+
+  const hideDoneTasks = false;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Container>
+      <header>
+        <h1>Lista zadań</h1>
       </header>
-    </div>
+      <Section
+        title={"Dodaj nowe zadanie"}
+        body={<Form />}
+      />
+      <Section
+        title={"Lista zadań"}
+        extraHeaderContent={
+          <Buttons
+            tasks={tasks}
+            hideDoneTasks={hideDoneTasks}
+          />}
+        body={
+          <Tasks
+            tasks={tasks}
+            hideDoneTasks={hideDoneTasks}
+          />}
+      />
+    </Container>
   );
 }
 
