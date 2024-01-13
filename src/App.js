@@ -5,20 +5,56 @@ import Form from './Form';
 import Tasks from './Tasks';
 import Section from './Section';
 import Container from './Container';
+import { useState } from 'react';
 
 
 function App() {
 
-  const tasks = [
+  const [tasks, setTasks] = useState([
     {
-      content: "Zrobić podstawową todo liste w JS", done: true,
+      id: 1, content: "Zrobić podstawową todo liste w JS", done: true,
     },
     {
-      content: "Przenieść podstawową todo liste do React-a", done: false,
+      id: 2, content: "Przenieść podstawową todo liste do React-a", done: false,
     },
-  ];
+  ]);
 
-  const hideDone = false;
+  const [hideDone, setHideDone] = useState(false);
+
+  const toggleHideDone = () => {
+    setHideDone(hideDone => !hideDone)
+  };
+
+  const removeTask = (id) => {
+    setTasks(tasks => tasks.filter(task => task.id !== id))
+  };
+
+  const toggleDoneTask = (id) => {
+    setTasks(tasks => tasks.map(task => {
+      if (task.id === id)
+        return {
+          ...task, done: !task.done
+        }
+      return task
+    }))
+  };
+
+  const toggleAllDone = () => {
+    setTasks(tasks => tasks.map(task => ({
+      ...task, done: true,
+    })))
+  };
+
+  const addNewTasks=(content)=>{
+    setTasks(tasks=>[
+      ...tasks,
+      {
+        content,
+        done: false,
+        id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
+      },
+    ])
+  }
 
   return (
     <Container>
@@ -27,7 +63,10 @@ function App() {
       </header>
       <Section
         title={"Dodaj nowe zadanie"}
-        body={<Form />}
+        body={
+          <Form
+          addNewTasks={addNewTasks}
+          />}
       />
       <Section
         title={"Lista zadań"}
@@ -35,11 +74,15 @@ function App() {
           <Buttons
             tasks={tasks}
             hideDone={hideDone}
+            toggleHideDone={toggleHideDone}
+            toggleAllDone={toggleAllDone}
           />}
         body={
           <Tasks
             tasks={tasks}
             hideDone={hideDone}
+            removeTask={removeTask}
+            toggleDoneTask={toggleDoneTask}
           />}
       />
     </Container>
