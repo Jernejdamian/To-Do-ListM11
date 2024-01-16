@@ -5,19 +5,42 @@ import Form from './Form';
 import Tasks from './Tasks';
 import Section from './Section';
 import Container from './Container';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function App() {
 
+  const taskFromLocalStorage = localStorage.getItem("tasks");
+
+  const [tasks, setTasks] = useState(
+    taskFromLocalStorage ? JSON.parse(taskFromLocalStorage,"tasks") : []
+  );
+
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  },[tasks])
+/*
+  const taskFromLocalStorage = localStorage.getItem("tasks");
+
+  const [tasks, setTasks] = useState(
+    taskFromLocalStorage ? JSON.parse(taskFromLocalStorage,"tasks"):[]
+  );
+
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  },[tasks])
+*/
+  /*
   const [tasks, setTasks] = useState([
-    {
-      id: 1, content: "Zrobić podstawową todo liste w JS", done: true,
-    },
-    {
-      id: 2, content: "Przenieść podstawową todo liste do React-a", done: false,
-    },
-  ]);
+      {
+        id: 1, content: "Zrobić podstawową todo liste w JS", done: true,
+      },
+      {
+        id: 2, content: "Przenieść podstawową todo liste do React-a", done: false,
+      },
+    ]);
+  */
+
 
   const [hideDone, setHideDone] = useState(false);
 
@@ -45,8 +68,8 @@ function App() {
     })))
   };
 
-  const addNewTasks=(content)=>{
-    setTasks(tasks=>[
+  const addNewTasks = (content) => {
+    setTasks(tasks => [
       ...tasks,
       {
         content,
@@ -65,7 +88,7 @@ function App() {
         title={"Dodaj nowe zadanie"}
         body={
           <Form
-          addNewTasks={addNewTasks}
+            addNewTasks={addNewTasks}
           />}
       />
       <Section
