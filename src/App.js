@@ -1,5 +1,3 @@
-
-import './App.css';
 import Buttons from './Buttons';
 import Form from './Form';
 import Tasks from './Tasks';
