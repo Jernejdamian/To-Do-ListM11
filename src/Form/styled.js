@@ -5,7 +5,7 @@ export const Wrapper = styled.form`
     grid-template-columns: 1fr auto;
     grid-gap: 20px;
 
-@media(max-width:767px){
+@media(max-width:${({theme})=>theme.breakpoint.mobileMax}px){
     grid-template-columns: 1fr;
     }
 `;
@@ -13,8 +13,8 @@ export const Wrapper = styled.form`
 export const Button = styled.button`
     border: none;
     padding: 10px;
-    background-color: teal;
-    color: white;
+    background-color: ${({theme})=>theme.color.teal};
+    color: ${({theme})=>theme.color.white};
 
     &:hover{
         background-color: hsl(180, 100%, 30%);

@@ -26,12 +26,12 @@ export const Button = styled.button`
     color: white;
 
     ${({done})=>done && css`
-    background-color: green;
+    background-color: ${({theme})=>theme.color.green};
     `
     }
 
     ${({remove})=>remove && css`
-    background-color: red;
+    background-color: ${({theme})=>theme.color.red};
     `
     }
 

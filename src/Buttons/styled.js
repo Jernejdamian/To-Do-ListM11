@@ -13,10 +13,10 @@ export const Wrapper = styled.div`
 export const Button = styled.button`
     background-color: transparent;
     border: none;
-    color: teal;
+    color: ${({theme})=>theme.color.teal};
 
     ${({ disabled }) => disabled && css`
-    color: #eee;
+    color: ${({theme})=>theme.color.silver};
     `}
     
 &:hover{

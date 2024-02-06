@@ -6,14 +6,14 @@ export const Wrapper = styled.section`
 `;
 
 export const Header = styled.div`
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid ${({theme})=>theme.color.silver};
     padding: 10px;
     display: grid;
     grid-template-columns: 1fr auto auto;
     justify-content: space-between;
     align-items: center;
 
-    @media(max-width:767px){
+    @media(max-width:${({theme})=>theme.breakpoint.mediaMax}){
         grid-template-columns: 1fr;
     }  
 `;
