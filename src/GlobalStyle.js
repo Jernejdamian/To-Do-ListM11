@@ -1,3 +1,6 @@
+import { createGlobalStyle} from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
 html{
   box-sizing: border-box;
   }
@@ -10,3 +13,5 @@ html{
       word-break: break-word;
       font-family: 'Montserrat', sans-serif;
   }
+
+`;
