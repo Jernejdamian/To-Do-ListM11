@@ -3,79 +3,24 @@ import Form from './Form';
 import Tasks from './Tasks';
 import Section from './Section';
 import Container from './Container';
-import { useEffect, useState } from 'react';
-
+import {  useState } from 'react';
+import { useTasks } from './useTasks';
 
 function App() {
 
-  const taskFromLocalStorage = localStorage.getItem("tasks");
-
-  const [tasks, setTasks] = useState(
-    taskFromLocalStorage ? JSON.parse(taskFromLocalStorage,"tasks") : []
-  );
-
-  useEffect(()=>{
-    localStorage.setItem("tasks", JSON.stringify(tasks))
-  },[tasks])
-/*
-  const taskFromLocalStorage = localStorage.getItem("tasks");
-
-  const [tasks, setTasks] = useState(
-    taskFromLocalStorage ? JSON.parse(taskFromLocalStorage,"tasks"):[]
-  );
-
-  useEffect(()=>{
-    localStorage.setItem("tasks", JSON.stringify(tasks))
-  },[tasks])
-*/
-  /*
-  const [tasks, setTasks] = useState([
-      {
-        id: 1, content: "Zrobić podstawową todo liste w JS", done: true,
-      },
-      {
-        id: 2, content: "Przenieść podstawową todo liste do React-a", done: false,
-      },
-    ]);
-  */
-
-
   const [hideDone, setHideDone] = useState(false);
-
+  
   const toggleHideDone = () => {
     setHideDone(hideDone => !hideDone)
   };
 
-  const removeTask = (id) => {
-    setTasks(tasks => tasks.filter(task => task.id !== id))
-  };
-
-  const toggleDoneTask = (id) => {
-    setTasks(tasks => tasks.map(task => {
-      if (task.id === id)
-        return {
-          ...task, done: !task.done
-        }
-      return task
-    }))
-  };
-
-  const toggleAllDone = () => {
-    setTasks(tasks => tasks.map(task => ({
-      ...task, done: true,
-    })))
-  };
-
-  const addNewTasks = (content) => {
-    setTasks(tasks => [
-      ...tasks,
-      {
-        content,
-        done: false,
-        id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
-      },
-    ])
-  }
+  const {
+    tasks,
+    addNewTasks,
+    toggleAllDone,
+    removeTask,
+    toggleDoneTask,
+  }=useTasks();
 
   return (
     <Container>
